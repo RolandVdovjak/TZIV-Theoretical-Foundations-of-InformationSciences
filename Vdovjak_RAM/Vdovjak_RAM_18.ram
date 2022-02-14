@@ -1,0 +1,91 @@
+//R1 Dec
+//R2 Bin
+//R3 i
+//R4 10^i
+//R5 celociselne delenie
+//R6 zvysok po celociselnom deleni
+//R7 pomocna premenna
+//R8 pomocna premenna
+
+read 1
+load 1
+store 7
+jump start
+
+koniec:
+reject
+
+// Test vstupu, pod 10000 a kladne cislo
+start:
+jzero koniec
+sub =10000
+jgzero koniec
+add =10000
+mult =-1
+jgzero koniec
+
+// Premena na Bin, zaciatok algoritmu ako takeho
+
+del:
+load 7
+jzero premenene
+load 3
+add =1
+store 3
+
+load 7
+div =2
+store 5
+mult =2
+sub 7
+
+//skace podla toho, ci je zvysok, alebo nie, par == bolo parne cislo, t.j. bez zvysku
+
+jzero par
+jump nepar
+
+par:
+load =0
+store 6
+jump bin
+
+nepar:
+load =1
+store 6
+jump bin
+
+bin:
+load 5
+store 7
+
+// ak je zvysok nula, nie je potrebne pokracovat v irteracii algoritmu
+load 6
+jzero del
+
+// 10 na i (R3)
+load 3
+store 8
+load =1
+store 4
+
+opakuj:
+load 8
+sub =1
+jzero zapis
+store 8
+load 4
+mult =10
+store 4
+jump opakuj
+
+zapis:
+load 2
+add 4
+store 2
+jump del
+
+premenene:
+write 2
+
+
+
